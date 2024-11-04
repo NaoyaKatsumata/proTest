@@ -44,15 +44,21 @@ class ShopController extends Controller
         $categories = Category::all();
         $favorites = Favorite::where('user_id','=',$userId)
                      ->get();
-        $shops = Shop::with(['area', 'category'])
+        $shops = Shop::with(['area', 'category','scores'])
+            ->when($sort === 'desc' or $sort === 'asc', function ($query) {
+                return $query->select('shops.*')
+                    ->selectRaw('AVG(reviews.score) as average_score') // スコアの平均を取得
+                    ->leftJoin('reviews', 'shops.id', '=', 'reviews.shop_id') // JOINでスコアを関連付け
+                    ->groupBy('shops.id');
+            })
             ->when($sort === 'random', function ($query) use ($sort) {
                 return $query->inRandomOrder();
             })
             ->when($sort === 'asc', function ($query) use ($sort) {
-                return $query->orderBy('shop_name', $sort);
+                return $query->orderByRaw('average_score IS NULL, average_score '.$sort);
             })
             ->when($sort === 'desc', function ($query) use ($sort) {
-                return $query->orderBy('shop_name', $sort);
+                return $query->orderByRaw('average_score IS NULL, average_score '.$sort);
             })
             ->when($searchName, function ($query) use ($searchName) {
                 return $query->where('shop_name', 'like', '%' . $searchName . '%');

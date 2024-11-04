@@ -38,8 +38,11 @@
                     <a href="/" class="inline-block w-[30px] h-[30px] text-center bg-white rounded-[5px] shadow-[3px_3px_0px_0px_rgba(0,0,0,0.3)]"><</a>
                     <p class="ml-4 text-2xl font-bold">{{$shop->shop_name}}</p>
                 </div>
-
+                @if($reviews !== null && $reviews->count() !== 0)
+                <img class="my-8 h-48 w-full object-cover" src="{{ asset('storage/'.$shop->img_path)}}" alt="No Image">
+                @else
                 <img class="my-8" src="{{ asset('storage/'.$shop->img_path)}}" alt="No Image">
+                @endif
 
                 <div class="flex mb-8">
                     <p>#{{$shop->area->area_name}}</p>
@@ -48,10 +51,74 @@
 
                 <p>{{$shop->detail}}</p>
 
-                <form class="flex content-center mt-8" action="/review" method="get">
-                    <input type="hidden" name="shopId" value="{{$shop->id}}">
-                    <input type="submit" class="border-b border-black" value="口コミを投稿する"/>
-                </form>
+                @if($reviews !== null && $reviews->count() !== 0)
+                    <form class="flex content-center mt-8" action="/review-all" method="get">
+                        <input type="hidden" name="shopId" value="{{$shop->id}}">
+                        <input type="submit" class="w-full py-2 text-white bg-blue-400" value="すべての口コミ情報"/>
+                    </form>
+                @endif
+
+                @if($reviews === null || $reviews->count() === 0)
+                    <form class="flex content-center mt-8" action="/review" method="get">
+                        <input type="hidden" name="shopId" value="{{$shop->id}}">
+                        <input type="submit" class="border-b border-black" value="口コミを投稿する"/>
+                    </form>
+                @else
+                <div class="mt-4 border-y-2 border-gray-300">
+                    <div class="flex justify-end my-4">
+                        <form class="flex content-center" action="/review-edit" method="get">
+                            <input type="hidden" name="shopId" value="{{$shop->id}}">
+                            <input type="submit" class="border-b border-black" value="口コミを編集"/>
+                        </form>
+                        <form class="flex content-center ml-4" action="/review-edit" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <input type="hidden" name="shopId" value="{{$shop->id}}">
+                            <input type="submit" class="border-b border-black" value="口コミを削除"/>
+                        </form>
+                    </div>
+                    <div class="flex mb-4">
+                        @if($reviews->score ===1)
+                            <img src="{{ asset('img/star_blue.svg')}}" class="w-[30px] mr-2">
+                            <img src="{{ asset('img/star_gray.svg')}}" class="w-[30px] mr-2">
+                            <img src="{{ asset('img/star_gray.svg')}}" class="w-[30px] mr-2">
+                            <img src="{{ asset('img/star_gray.svg')}}" class="w-[30px] mr-2">
+                            <img src="{{ asset('img/star_gray.svg')}}" class="w-[30px] mr-2">
+                        @elseif($reviews->score ===2)
+                            <img src="{{ asset('img/star_blue.svg')}}" class="w-[30px] mr-2">
+                            <img src="{{ asset('img/star_blue.svg')}}" class="w-[30px] mr-2">
+                            <img src="{{ asset('img/star_gray.svg')}}" class="w-[30px] mr-2">
+                            <img src="{{ asset('img/star_gray.svg')}}" class="w-[30px] mr-2">
+                            <img src="{{ asset('img/star_gray.svg')}}" class="w-[30px] mr-2">
+                        @elseif($reviews->score ===3)
+                            <img src="{{ asset('img/star_blue.svg')}}" class="w-[30px] mr-2">
+                            <img src="{{ asset('img/star_blue.svg')}}" class="w-[30px] mr-2">
+                            <img src="{{ asset('img/star_blue.svg')}}" class="w-[30px] mr-2">
+                            <img src="{{ asset('img/star_gray.svg')}}" class="w-[30px] mr-2">
+                            <img src="{{ asset('img/star_gray.svg')}}" class="w-[30px] mr-2">
+                        @elseif($reviews->score ===4)
+                            <img src="{{ asset('img/star_blue.svg')}}" class="w-[30px] mr-2">
+                            <img src="{{ asset('img/star_blue.svg')}}" class="w-[30px] mr-2">
+                            <img src="{{ asset('img/star_blue.svg')}}" class="w-[30px] mr-2">
+                            <img src="{{ asset('img/star_blue.svg')}}" class="w-[30px] mr-2">
+                            <img src="{{ asset('img/star_gray.svg')}}" class="w-[30px] mr-2">
+                        @elseif($reviews->score ===5)
+                            <img src="{{ asset('img/star_blue.svg')}}" class="w-[30px] mr-2">
+                            <img src="{{ asset('img/star_blue.svg')}}" class="w-[30px] mr-2">
+                            <img src="{{ asset('img/star_blue.svg')}}" class="w-[30px] mr-2">
+                            <img src="{{ asset('img/star_blue.svg')}}" class="w-[30px] mr-2">
+                            <img src="{{ asset('img/star_blue.svg')}}" class="w-[30px] mr-2">
+                        @else
+                            <img src="{{ asset('img/star_gray.svg')}}" class="w-[30px] mr-2">
+                            <img src="{{ asset('img/star_gray.svg')}}" class="w-[30px] mr-2">
+                            <img src="{{ asset('img/star_gray.svg')}}" class="w-[30px] mr-2">
+                            <img src="{{ asset('img/star_gray.svg')}}" class="w-[30px] mr-2">
+                            <img src="{{ asset('img/star_gray.svg')}}" class="w-[30px] mr-2">
+                        @endif
+                    </div>
+                    <p class="break-words whitespace-normal">{{$reviews->comment}}</p>
+                </div>
+                @endif
             </div>
 
         </div>

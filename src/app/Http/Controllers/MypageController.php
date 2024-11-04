@@ -18,6 +18,7 @@ class MypageController extends Controller
         }
         $reservations = Reservation::with(['shop'])
             ->where('user_id','=',$userId)
+            ->orderBy('reservation_date','asc')
             ->get();
         $favorites = Favorite::with(['shop'])
             ->where('user_id','=',$userId)

@@ -36,6 +36,14 @@ Route::middleware('auth')->group(function () {
     Route::put('/mypage',[MypageController::class,'favorite']);
     Route::delete('/mypage',[MypageController::class,'delete']);
     Route::get('/review',[ReviewController::class,'show']);
+    Route::put('/review',[ReviewController::class,'store']);
+    Route::patch('/review',[ReviewController::class,'update']);
+    Route::get('/review-edit',[ReviewController::class,'edit']);
+    Route::delete('/review-edit',[ReviewController::class,'delete']);
+    Route::get('/review-all',[ReviewController::class,'reviewAll']);
 });
+
+Route::delete('/review-all',[ReviewController::class,'deleteAdmin']);
+
 
 require __DIR__.'/auth.php';

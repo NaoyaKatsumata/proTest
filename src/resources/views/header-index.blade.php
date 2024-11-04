@@ -52,7 +52,7 @@
                 <div class="custom-options absolute hidden bg-white border border-gray-300 rounded-lg mt-14 w-full shadow-lg">
                     <span class="custom-option block px-4 py-2 hover:bg-blue-400 hover:text-white cursor-pointer" data-value="random">ランダム</span>
                     <span class="custom-option block px-4 py-2 hover:bg-blue-400 hover:text-white cursor-pointer" data-value="desc">評価が高い順</span>
-                    <span class="custom-option block px-4 py-2 hover:bg-blue-400 hover:text-white cursor-pointer" data-value="asc">評価が安い順</span>
+                    <span class="custom-option block px-4 py-2 hover:bg-blue-400 hover:text-white cursor-pointer" data-value="asc">評価が低い順</span>
                 </div>
                 <div class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                     <svg id="custom-arrow" class="w-8 h-8 text-red-500 transition-transform duration-200" viewBox="0 0 24 24" fill="#A0A0A0">

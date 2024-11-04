@@ -5,16 +5,28 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Shop;
 use App\Models\Reservation;
+use App\Models\Review;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class DetailController extends Controller
 {
     public function show(Request $request){
         $shopId = $request->shopId;
+        $user = Auth::user();
+        if($user){
+            $userId = $user->id;
+        }else{
+            $userId = '';
+        }
+
         $shop = Shop::where('id','=',$shopId)
             ->first();
+        $reviews = Review::where('user_id','=',$userId)
+            ->where('shop_id','=',$shopId)
+            ->first();
 
-        return view('detail',['shop'=>$shop]);
+        return view('detail',['shop'=>$shop,'reviews'=>$reviews]);
     }
 
     public function store(Request $request){
