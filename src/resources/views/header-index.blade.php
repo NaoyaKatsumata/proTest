@@ -105,13 +105,11 @@
                                     {{ __('Log Out') }}
                                 </x-dropdown-link>
                             </form></li>
-                <li class="mb-2 text-2xl text-blue-500"><form class="text-2xl text-blue-500" method="POST" action="/mypage">
-                                @csrf
-                                @auth
-                                <input type="hidden" name="userId" value="{{Auth::user()->id}}">
-                                @endauth
-                                <input type="submit" value="My page">
-                            </form></li>
+                <li class="mb-2 text-2xl text-blue-500">
+                    <form class="text-2xl text-blue-500" method="get" action="/mypage">
+                        <input type="submit" value="My page">
+                    </form>
+                </li>
             </ul>
         </div>
     </div>

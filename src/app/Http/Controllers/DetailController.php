@@ -15,7 +15,6 @@ class DetailController extends Controller
             ->first();
 
         return view('detail',['shop'=>$shop]);
-
     }
 
     public function store(Request $request){
