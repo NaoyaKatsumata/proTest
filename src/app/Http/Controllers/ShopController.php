@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 class ShopController extends Controller
 {
     public function index(){
-        $user = Auth::user();
+        $user = Auth::guard('users')->user();
         if($user){
             $userId = $user->id;
         }else{
@@ -23,7 +23,7 @@ class ShopController extends Controller
         $categories = Category::all();
         $favorites = Favorite::where('user_id','=',$userId)
             ->get();
-        return view('index',['userId'=>$userId,
+        return view('user.index',['userId'=>$userId,
                              'shops'=>$shops,
                              'areas'=>$areas,
                              'categories'=>$categories,
@@ -75,7 +75,7 @@ class ShopController extends Controller
             })
             ->get();
 
-            return view('index',['userId'=>$userId,
+            return view('user.index',['userId'=>$userId,
                                  'shops'=>$shops,
                                  'areas'=>$areas,
                                  'categories'=>$categories,
@@ -89,7 +89,7 @@ class ShopController extends Controller
 
     public function favorite(Request $request){
         $shopId = $request->shopId;
-        $user = Auth::user();
+        $user = Auth::guard('users')->user();
         if($user){
             $userId = $user->id;
         }else{

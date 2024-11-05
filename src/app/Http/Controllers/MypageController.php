@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class MypageController extends Controller
 {
     public function show(){
-        $user = Auth::user();
+        $user = Auth::guard('users')->user();
         if($user){
             $userId = $user->id;
         }else{
@@ -24,12 +24,12 @@ class MypageController extends Controller
             ->where('user_id','=',$userId)
             ->get();
         // dd($reservations,$favorites);
-        return view('/mypage',['reservations'=>$reservations,'favorites'=>$favorites]);
+        return view('user.mypage',['reservations'=>$reservations,'favorites'=>$favorites]);
     }
 
     public function favorite(Request $request){
         $shopId = $request->shopId;
-        $user = Auth::user();
+        $user = Auth::guard('users')->user();
         if($user){
             $userId = $user->id;
         }else{

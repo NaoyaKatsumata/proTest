@@ -14,7 +14,7 @@ class ReviewController extends Controller
 {
     public function show(Request $request){
         $shopId = $request->shopId;
-        $user = Auth::user();
+        $user = Auth::guard('users')->user();
         if($user){
             $userId = $user->id;
         }else{
@@ -25,12 +25,12 @@ class ReviewController extends Controller
         $shop = Shop::where('id','=',$shopId)
             ->first();
 
-        return view('review',['shop'=>$shop,'favorites'=>$favorites]);
+        return view('user.review',['shop'=>$shop,'favorites'=>$favorites]);
     }
 
     public function store(ReviewRequest $request){
         $shopId = $request->shopId;
-        $user = Auth::user();
+        $user = Auth::guard('users')->user();
         if($user){
             $userId = $user->id;
         }else{
@@ -63,12 +63,12 @@ class ReviewController extends Controller
             ->where('shop_id','=',$shopId)
             ->get();
 
-        return view('/thanks',['review'=>$review]);
+        return view('user.thanks',['review'=>$review]);
     }
 
     public function edit(Request $request){
         $shopId = $request->shopId;
-        $user = Auth::user();
+        $user = Auth::guard('users')->user();
         if($user){
             $userId = $user->id;
         }else{
@@ -82,12 +82,12 @@ class ReviewController extends Controller
             ->where('shop_id','=',$shopId)
             ->first();
 
-        return view('reviewEdit',['shop'=>$shop,'favorites'=>$favorites,'review'=>$review]);
+        return view('user.reviewEdit',['shop'=>$shop,'favorites'=>$favorites,'review'=>$review]);
     }
 
     public function delete(Request $request){
         $shopId = $request->shopId;
-        $user = Auth::user();
+        $user = Auth::guard('users')->user();
         $userId = $user->id;
 
         Review::where('shop_id','=',$shopId)
@@ -99,7 +99,7 @@ class ReviewController extends Controller
 
     public function update(ReviewRequest $request){
         $shopId = $request->shopId;
-        $user = Auth::user();
+        $user = Auth::guard('users')->user();
         if($user){
             $userId = $user->id;
         }else{
@@ -129,7 +129,7 @@ class ReviewController extends Controller
             ->where('shop_id','=',$shopId)
             ->get();
 
-        return view('/thanks',['review'=>$review]);
+        return view('user.thanks',['review'=>$review]);
     }
 
     public function reviewAll(Request $request){
@@ -139,7 +139,7 @@ class ReviewController extends Controller
             ->where('shop_id','=',$shopId)
             ->get();
 
-        return view('reviewAll',['reviews'=>$reviews,'shop'=>$shop]);
+        return view('user.reviewAll',['reviews'=>$reviews,'shop'=>$shop]);
     }
 
     public function deleteAdmin(Request $request){

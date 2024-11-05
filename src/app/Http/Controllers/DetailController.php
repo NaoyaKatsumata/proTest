@@ -13,7 +13,7 @@ class DetailController extends Controller
 {
     public function show(Request $request){
         $shopId = $request->shopId;
-        $user = Auth::user();
+        $user = Auth::guard('users')->user();
         if($user){
             $userId = $user->id;
         }else{
@@ -26,7 +26,7 @@ class DetailController extends Controller
             ->where('shop_id','=',$shopId)
             ->first();
 
-        return view('detail',['shop'=>$shop,'reviews'=>$reviews]);
+        return view('user.detail',['shop'=>$shop,'reviews'=>$reviews]);
     }
 
     public function store(Request $request){
@@ -45,6 +45,6 @@ class DetailController extends Controller
             'reservation_date'=>$reservation_date
         ]);
 
-        return view('done');
+        return view('user.done');
     }
 }

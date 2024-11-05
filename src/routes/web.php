@@ -29,7 +29,7 @@ Route::get('/',[ShopController::class,'index']);
 Route::post('/',[ShopController::class,'search']);
 Route::get('/detail',[DetailController::class,'show']);
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth:users')->group(function () {
     Route::put('/',[ShopController::class,'favorite']);
     Route::post('/done',[DetailController::class,'store']);
     Route::get('/mypage',[MypageController::class,'show']);
