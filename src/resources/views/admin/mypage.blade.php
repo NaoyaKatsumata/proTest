@@ -23,8 +23,11 @@
             </div>
             <h1 class="pl-8 py-2 font-bold text-4xl text-blue-600">Rose</h1>
         </div>
-        <main class="mx-auto">
-            test
+        <main class="flex flex-col justify-center items-center mx-auto mt-16">
+            <a href="/admin/index" class="inline-block w-[200px] my-4 py-2 px-4 text-center text-white bg-blue-400 rounded-[5px]">コメント一覧</a>
+            <form action="admin/import" method="get">
+                <a href="/admin/import" class="inline-block w-[200px] my-4 py-2 px-4 text-center text-white bg-blue-400 rounded-[5px]">csvインポート</a>
+            </form>
         </main>
     </div>
 </body>
@@ -41,20 +44,15 @@
         </div>
         <div class="flex justify-center w-[80%] mx-auto mt-8 bg-white p-8 rounded-lg">
             <ul>
-                <li class="mb-2 text-2xl text-blue-500"><a href="/">Home</a></li>
+                <li class="mb-2 text-2xl text-blue-500"><a href="/admin">Home</a></li>
                 <li class="mb-2"><form class="text-2xl text-blue-500" method="POST" action="{{ route('admin.logout') }}">
-                                @csrf
-                                <x-dropdown-link :href="route('admin.logout')"
-                                        onclick="event.preventDefault();
-                                                    this.closest('form').submit();">
-                                    {{ __('Log Out') }}
-                                </x-dropdown-link>
-                            </form></li>
-                <li class="mb-2 text-2xl text-blue-500">
-                    <form class="text-2xl text-blue-500" method="get" action="/mypage">
-                        <input type="submit" value="My page">
-                    </form>
-                </li>
+                    @csrf
+                    <x-dropdown-link :href="route('admin.logout')"
+                            onclick="event.preventDefault();
+                            this.closest('form').submit();">
+                        {{ __('Log Out') }}
+                    </x-dropdown-link>
+                    </form></li>
             </ul>
         </div>
     </div>

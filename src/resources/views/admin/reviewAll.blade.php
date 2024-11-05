@@ -27,7 +27,7 @@
             <p class="mx-[5%] mt-8 text-2xl">コメント一覧</p>
             <p class="mx-[5%] mt-4 text-xl font-bold">店舗名：{{$shop->shop_name}}</p>
             @foreach($reviews as $review)
-                <form action="review-all" method="post" class="w-[90%] mx-auto mt-8 py-4 px-4 border-2">
+                <form action="/admin/review-all" method="post" class="w-[90%] mx-auto mt-8 py-4 px-4 border-2">
                     @csrf
                     @method('DELETE')
                     <input type="hidden" name="reviewId" value="{{$review->id}}">
@@ -93,20 +93,15 @@
         </div>
         <div class="flex justify-center w-[80%] mx-auto mt-8 bg-white p-8 rounded-lg">
             <ul>
-                <li class="mb-2 text-2xl text-blue-500"><a href="/">Home</a></li>
+                <li class="mb-2 text-2xl text-blue-500"><a href="/admin">Home</a></li>
                 <li class="mb-2"><form class="text-2xl text-blue-500" method="POST" action="{{ route('admin.logout') }}">
-                                @csrf
-                                <x-dropdown-link :href="route('admin.logout')"
-                                        onclick="event.preventDefault();
-                                                    this.closest('form').submit();">
-                                    {{ __('Log Out') }}
-                                </x-dropdown-link>
-                            </form></li>
-                <li class="mb-2 text-2xl text-blue-500">
-                    <form class="text-2xl text-blue-500" method="get" action="/mypage">
-                        <input type="submit" value="My page">
-                    </form>
-                </li>
+                    @csrf
+                    <x-dropdown-link :href="route('admin.logout')"
+                            onclick="event.preventDefault();
+                            this.closest('form').submit();">
+                        {{ __('Log Out') }}
+                    </x-dropdown-link>
+                    </form></li>
             </ul>
         </div>
     </div>

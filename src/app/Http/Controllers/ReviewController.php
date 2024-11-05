@@ -44,6 +44,7 @@ class ReviewController extends Controller
         if($review->count() >0){
             return redirect('/review?shopId='.$shopId);
         }
+
         if ($request->hasFile('image')) {
             $file = $request->file('image')->store('img', 'public');
             $imgPath = Storage::url($file);
@@ -142,13 +143,5 @@ class ReviewController extends Controller
         return view('user.reviewAll',['reviews'=>$reviews,'shop'=>$shop]);
     }
 
-    public function deleteAdmin(Request $request){
-        $reviewId = $request->reviewId;
-        $shopId = $request->shopId;
-
-        Review::where('id','=',$reviewId)
-            ->delete();
-        
-        return redirect('review-all?shopId='.$shopId);
-    }
+    
 }

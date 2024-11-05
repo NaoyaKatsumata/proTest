@@ -18,13 +18,6 @@ use App\Http\Controllers\ReviewController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/',[ShopController::class,'index']);
 Route::post('/',[ShopController::class,'search']);
 Route::get('/detail',[DetailController::class,'show']);
@@ -43,7 +36,7 @@ Route::middleware('auth:users')->group(function () {
     Route::get('/review-all',[ReviewController::class,'reviewAll']);
 });
 
-Route::delete('/review-all',[ReviewController::class,'deleteAdmin']);
+
 
 
 require __DIR__.'/auth.php';

@@ -55,10 +55,10 @@ class ShopController extends Controller
                 return $query->inRandomOrder();
             })
             ->when($sort === 'asc', function ($query) use ($sort) {
-                return $query->orderByRaw('average_score IS NULL, average_score '.$sort);
+                return $query->orderByRaw('average_score IS NULL, average_score ASC');
             })
             ->when($sort === 'desc', function ($query) use ($sort) {
-                return $query->orderByRaw('average_score IS NULL, average_score '.$sort);
+                return $query->orderByRaw('average_score IS NULL, average_score DESC');
             })
             ->when($searchName, function ($query) use ($searchName) {
                 return $query->where('shop_name', 'like', '%' . $searchName . '%');

@@ -27,9 +27,7 @@
             <p class="mx-[5%] mt-8 text-2xl">コメント一覧</p>
             <p class="mx-[5%] mt-4 text-xl font-bold">店舗名：{{$shop->shop_name}}</p>
             @foreach($reviews as $review)
-                <form action="review-all" method="post" class="w-[90%] mx-auto mt-8 py-4 px-4 border-2">
-                    @csrf
-                    @method('DELETE')
+                <div class="w-[90%] mx-auto mt-8 py-4 px-4 border-2">
                     <input type="hidden" name="reviewId" value="{{$review->id}}">
                     <input type="hidden" name="shopId" value="{{$shop->id}}">
                     <p class="break-words whitespace-normal">ユーザ名：{{$review->user->name}}</p>
@@ -74,8 +72,7 @@
                         @endif
                     </div>
                     <p class="break-words whitespace-normal">コメント：{{$review->comment}}</p>
-                    <input type="submit" name="submit" class="w-[100px] bg-blue-500 text-white rounded-[5px] mt-4" value="削除">
-                </form>
+                </div>
             @endforeach
         </main>
     </div>

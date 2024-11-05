@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Admin\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Admin\Auth\EmailVerificationNotificationController;
@@ -24,33 +25,15 @@ use App\Http\Controllers\Admin\Auth\VerifyEmailController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-Route::get('/',[AdminController::class,'index']);
-Route::post('/',[ShopController::class,'search']);
-Route::get('/detail',[DetailController::class,'show']);
-
 Route::middleware('auth:admin')->group(function () {
     Route::get('/',[AdminController::class,'index']);
-    Route::put('/',[ShopController::class,'favorite']);
-    Route::post('/done',[DetailController::class,'store']);
-    Route::get('/mypage',[MypageController::class,'show']);
-    Route::put('/mypage',[MypageController::class,'favorite']);
-    Route::delete('/mypage',[MypageController::class,'delete']);
-    Route::get('/review',[ReviewController::class,'show']);
-    Route::put('/review',[ReviewController::class,'store']);
-    Route::patch('/review',[ReviewController::class,'update']);
-    Route::get('/review-edit',[ReviewController::class,'edit']);
-    Route::delete('/review-edit',[ReviewController::class,'delete']);
-    Route::get('/review-all',[ReviewController::class,'reviewAll']);
+    Route::get('/import',[AdminController::class,'showImport']);
+    Route::post('/import',[AdminController::class,'import']);
+    Route::get('/index',[AdminController::class,'shops']);
+    Route::post('/index',[AdminController::class,'search']);
+    Route::get('/review-all',[AdminController::class,'reviewAll']);
+    Route::delete('/review-all',[AdminController::class,'deleteAdmin']);
 });
-
-Route::delete('/review-all',[ReviewController::class,'deleteAdmin']);
 
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
