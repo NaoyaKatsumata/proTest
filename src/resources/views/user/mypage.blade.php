@@ -77,24 +77,7 @@
                                     $reservationDate = new DateTime($reservation->reservation_date);
                                     $reservationDate->format('Y-m-d');
                                 @endphp
-                                @if($reservationDate>$nowDate)
-                                    <form class="flex justify-end w-full" action="/edit" method="post">
-                                        @csrf
-                                        <input type="hidden" name="userId" value="{{Auth::guard('users')->user()->id}}">
-                                        <input type="hidden" name="shopId" value="{{$reservation->id}}">
-                                        <input type="hidden" name="date" value="{{$reservation->reservation_date}}">
-                                        <input type="hidden" name="time" value="{{$reservation->reservation_time}}">
-                                        <input type="hidden" name="number" value="{{$reservation->reservation_guest_count}}">
-                                        <input type="submit" class="w-[100px] content-center mb-2 px-4 text-white bg-blue-400 rounded-[5px]" value="編集">
-                                    </form>
-                                @elseif($reservationDate<$nowDate)
-                                    <form class="flex justify-end w-full" action="/review" method="post">
-                                        @csrf
-                                        <input type="hidden" name="userId" value="{{Auth::guard('users')->user()->id}}">
-                                        <input type="hidden" name="shopId" value="{{$reservation->id}}">
-                                        <input type="submit" class="w-[100px] content-center mb-2 px-4 text-white bg-blue-400 rounded-[5px]" value="評価">
-                                    </form>
-                                @endif
+                                
                             </div>
                         </div>
                     </div>
