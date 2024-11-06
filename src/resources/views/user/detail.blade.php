@@ -232,6 +232,7 @@
                 <li class="mb-2 text-2xl text-blue-500"><a href="/">Home</a></li>
                 <li class="mb-2 text-2xl text-blue-500"><a href="{{ route('user.login') }}">Log in</a></li>
                 <li class="mb-2 text-2xl text-blue-500"><a href="{{ route('user.register') }}">Register</a></li>
+                <li class="mb-2 text-2xl text-blue-500"><a href="{{ route('admin.login') }}">管理者ログイン</a></li>
             </ul>
         </div>
     </div>

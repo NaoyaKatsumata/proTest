@@ -29,7 +29,7 @@ class AdminController extends Controller
 
         Excel::import(new ClientDataImport, $request->file('file'));
 
-        return view('admin.mypage');
+        return view('admin.done');
     }
 
     public function shops(){

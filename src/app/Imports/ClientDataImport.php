@@ -13,25 +13,24 @@ class ClientDataImport implements ToModel
         $shopName = $row[0];
         $detail = $row[1];
         $categoryId = $row[2];
-        $imageNum = $row[3]; // 例として、2列目に画像パスがあると仮定
-        $areaId = $row[4];
+        $areaId = $row[3];
         $fileName=null;
 
-        switch($imageNum){
+        switch($categoryId){
             case 1:
-                $fileName = 'img/italian.jpg';
-                break;
-            case 2:
-                $fileName = 'img/izakaya.jpg';
-                break;
-            case 3:
-                $fileName = 'img/ramen.jpg';
-                break;
-            case 4:
                 $fileName = 'img/sushi.jpg';
                 break;
-            case 5:
+            case 2:
                 $fileName = 'img/yakiniku.jpg';
+                break;
+            case 3:
+                $fileName = 'img/izakaya.jpg';
+                break;
+            case 4:
+                $fileName = 'img/italian.jpg';
+                break;
+            case 5:
+                $fileName = 'img/ramen.jpg';
                 break;
             default:
                 $fileName = "";
