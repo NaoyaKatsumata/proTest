@@ -2,7 +2,7 @@
 <h1>開発環境構築</h1>
 <ul>
     <li>githubからファイルをローカルへ<br>
-        　URL->https://github.com/NaoyaKatsumata/fresh
+        　URL->https://github.com/NaoyaKatsumata/proTest
     </li>
     <li>クローンしたフォルダに移動</li>
     <li>dockerが起動しているのを確認し、ビルド<br>
