@@ -50,6 +50,9 @@
         　php artisan storage:link
     </li>
 </ul>
+<h1>管理者登録</h1>
+<p>管理者の登録は http://localhost/admin/register にアクセスし登録してください</p>
+<p>ログインはメニューの管理者ログインからできます</p>
 <h1>使用技術</h1>
 <ul>
     <li>laravel：9.52.16</li>
